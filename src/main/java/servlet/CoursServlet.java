@@ -12,35 +12,33 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import bll.BidonBLL;
-import bo.Bidon;
+import bll.CoursBLL;
+import bo.Cours;
 
-@WebServlet("/BidonServlet")
-public class BidonServlet extends HttpServlet {
+@WebServlet("/cours")
+public class CoursServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
-	private BidonBLL bll;
+	private CoursBLL bll;
 	
 	@Override
 	public void init() throws ServletException {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-	
-	/*
-	 * Alternative a la syntaxe ci-dessus
-	 */
-	/*
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
-	}
-	*/
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Bidon> bidons = bll.selectAll();
-		for (Bidon current : bidons) {
-			System.out.println(current);
-		}
+		List<Cours> cours = bll.selectAll();
+		request.setAttribute("listeCours", cours);
+		request.getRequestDispatcher("/WEB-INF/cours.jsp").forward(request, response);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String libelle = request.getParameter("libelle");
+		Cours cours = new Cours();
+		cours.setTitre(libelle);
+		bll.insert(cours);
+		doGet(request, response);
 	}
 }
