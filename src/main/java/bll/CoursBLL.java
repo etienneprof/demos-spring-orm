@@ -12,7 +12,7 @@ import dal.CoursDAO;
 @Service
 public class CoursBLL {
 	@Autowired
-	@Qualifier("bouchon")
+	@Qualifier("hibernate")
 	private CoursDAO dao;
 	
 	public List<Cours> selectAll() {

@@ -32,4 +32,28 @@ public class CoursDAOBouchonImpl implements CoursDAO {
 	public List<Cours> selectAll() {
 		return listeCours;
 	}
+
+	@Override
+	public void update(Cours cours) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Cours cours) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Cours findById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
